@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<project name="Hello World Project" default="dist" basedir="../">
+	<description>Hello World Project</description>
+	
+	<property name="main.class" value="pet.code.example.helloworld.HelloWorld" />
+
+	<property name="src" location="src" />
+	<property name="build" location="build" />
+	<property name="dist" location="dist" />
+	<property name="version" value="1.0" />
+
+	<target name="dist" depends="compile" description="generate the distribution">
+		<mkdir dir="${dist}" />
+		<jar destfile="${dist}/Application.jar" basedir="${build}">
+			<manifest>
+				<attribute name="Main-Class" value="${main.class}" />
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="compile" depends="init" description="compile the source">
+		<javac fork="yes" srcdir="${src}" destdir="${build}" includeantruntime="false" />
+	</target>
+
+	<target name="init" depends="clean">
+		<mkdir dir="${build}" />
+	</target>
+
+	<target name="clean" description="clean up">
+		<delete dir="${dist}" />
+		<delete dir="${build}" />
+	</target>
+</project>
